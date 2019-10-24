@@ -57,8 +57,8 @@ class RestClient(object):
             req = urllib.request.Request(url=url)
 
             if username is not None and password is not None:
-                base64creds = base64.b64encode('%s:%s' % (username,password))
-                req.add_header("Authorization", "Basic %s" % base64creds)
+		base64creds = base64.b64encode('{0}:{1}'.format(username, password).encode())
+                req.add_header("Authorization", "Basic {0}".format(base64creds.decode()))
             
             if verify_ssl is False:
                 context = ssl._create_unverified_context()
@@ -108,8 +108,8 @@ class RestClient(object):
                                          headers={'Content-Type': 'application/json'})
 
             if username is not None and password is not None:
-                base64creds = base64.b64encode('%s:%s' % (username,password))
-                req.add_header("Authorization", "Basic %s" % base64creds)
+                base64creds = base64.b64encode('{0}:{1}'.format(username, password).encode())
+                req.add_header("Authorization", "Basic {0}".format(base64creds.decode()))
             
             if verify_ssl is False:
                 context = ssl._create_unverified_context()
